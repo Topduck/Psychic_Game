@@ -36,41 +36,45 @@
 
         //console.log(alphabet.length);
         //Computer picks it's letter
-        var gl = [];
-        var c = alphabet[Math.floor(Math.random() * alphabet.length)];
-        console.log("winner "+c)      
-        //User key stroke triggers game
-        document.onkeyup = function (event) {
-            var g = event.key
-            console.log(g)
-            if (guesses > 1){
-                //winner!
-                if (c===g) {
-                    win++
+        function outerGame(event) {
+            var gl = [];
+            var c = alphabet[Math.floor(Math.random() * alphabet.length)];
+            console.log("winner "+c)      
+            //User key stroke triggers game
+            document.onkeyup = function (event) {
+                var g = event.key
+                console.log(g)
+                if (guesses > 1){
+                    console.log("winner "+c) 
+                    //winner!
+                    if (c===g) {
+                        win++
+                        gl = [];
+                        guesses = 9
+                        wins.innerHTML = win
+                        left.innerHTML = guesses
+                        guessed.innerHTML = gl
+                    }
+                    //Guess Again
+                    else {
+                        gl.push(g);
+                        guesses--
+                        guessed.innerHTML = gl
+                        left.innerHTML = guesses
+                        console.log(gl)
+                    }
+                }
+                //Lost, try again
+                else{
+                    loss++
                     gl = [];
+                    losses.innerHTML = loss
                     guesses = 9
-                    wins.innerHTML = win
-                    left.innerHTML = guesses
                     guessed.innerHTML = gl
                 }
-                //Guess Again
-                else {
-                    gl.push(g);
-                    guesses--
-                    guessed.innerHTML = gl
-                    left.innerHTML = guesses
-                    console.log(gl)
-                }
-            }
-            //Lost, try again
-            else{
-            loss++
-            gl = [];
-            losses.innerHTML = loss
-            guesses = 9
-            guessed.innerHTML = gl
             }
         }
+        outerGame();
     </script>
 
 </body>
