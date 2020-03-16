@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Pyschic Game
+  </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+    <div class="row"><h1 id="title">The Psychic Game</h1></div>
+    <div class="row">Guess what letter I'm thinking of...</div>
+    <div class="row"><span> </span></div>
+    <div class="wins row">Wins: <span id="wins"></span></div>
+    <div class="row"><span> </span></div>
+    <div class="losses row">Losses: <span id="losses"></span></div>
+    <div class="row"><span> </span></div>
+    <div class="guessesLeft row">Guesses Left: <span id="guessesLeft"></span></div>
+    <div class="row"><span> </span></div>
+    <div class="guessedLetters row">Your Guesses so far: <span id="guessedLetters"></span></div>
+    </div>
+    <script type="text/javascript">
+        let wins = document.getElementById("wins")
+        let losses = document.getElementById("losses")
+        let left = document.getElementById("guessesLeft")
+        let guessed = document.getElementById("guessedLetters")
+        var alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
+        var win = 0
+        var loss = 0
+        var guesses = 9
+
+        losses.innerHTML = loss
+        left.innerHTML = guesses
+        wins.innerHTML = win
+
+        //console.log(alphabet.length);
+        //Computer picks it's letter
+        var gl = [];
+        var c = alphabet[Math.floor(Math.random() * alphabet.length)];
+        console.log("winner "+c)      
+        //User key stroke triggers game
+        document.onkeyup = function (event) {
+            var g = event.key
+            console.log(g)
+            if (guesses > 1){
+                //winner!
+                if (c===g) {
+                    win++
+                    gl = [];
+                    guesses = 9
+                    wins.innerHTML = win
+                    left.innerHTML = guesses
+                    guessed.innerHTML = gl
+                }
+                //Guess Again
+                else {
+                    gl.push(g);
+                    guesses--
+                    guessed.innerHTML = gl
+                    left.innerHTML = guesses
+                    console.log(gl)
+                }
+            }
+            //Lost, try again
+            else{
+            loss++
+            gl = [];
+            losses.innerHTML = loss
+            guesses = 9
+            guessed.innerHTML = gl
+            }
+        }
+    </script>
+
+</body>
