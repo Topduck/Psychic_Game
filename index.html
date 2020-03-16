@@ -38,7 +38,7 @@
         //Computer picks it's letter
         function outerGame() {
             var gl = [];
-            var c = alphabet[Math.floor(Math.random() * alphabet.length)];     
+            var c = alphabet[Math.floor(Math.random() * alphabet.length)]; 
             console.log("winner "+c) 
             //User key stroke triggers game
             document.onkeyup = function (event) {
@@ -53,8 +53,8 @@
                         wins.innerHTML = win
                         left.innerHTML = guesses
                         guessed.innerHTML = gl
-                        return;
-                        debugger
+                        outerGame();
+                        //debugger
                     }
                     //Guess Again
                     else {
@@ -68,12 +68,14 @@
                 //Lost, try again
                 else{
                     loss++
+
                     gl = [];
                     losses.innerHTML = loss
                     guesses = 9
+                    left.innerHTML = guesses
                     guessed.innerHTML = gl
-                    return;
-                    debugger
+                    outerGame();
+                    //debugger
                 }
             }
         }
